@@ -18,10 +18,9 @@ jobs:
         with:
           distribution: 'corretto'
           java-version: 17
-          cache: maven
 
-      - name: Print maven version
-        run: mvn -v
+#      - name: Print maven version
+#        run: mvn -v
 
       - name: Unit Tests
         run: mvn -B test --file pom.xml
