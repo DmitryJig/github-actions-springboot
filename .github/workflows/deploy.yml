@@ -32,8 +32,11 @@ jobs:
 
       - name: Create docker image
         run: |
-          mvn clean
-          mvn spring-boot:build-image
+          pwd
+#          mvn clean
+#          mvn spring-boot:build-image
+
+
 #      - name: Build Docker Image
 #        uses: actions/build-push-action@v5
 #        with:
