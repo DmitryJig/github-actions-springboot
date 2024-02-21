@@ -30,11 +30,14 @@ jobs:
           mvn clean
           mvn -B package --file pom.xml
 
+      - name: Where I
+        run: pwd
+
       - name: Create docker image
         run: |
-          pwd
-#          mvn clean
-#          mvn spring-boot:build-image
+          mvn clean
+          docker system prune -a -f
+          mvn spring-boot:build-image
 
 
 #      - name: Build Docker Image
