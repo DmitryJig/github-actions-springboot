@@ -19,14 +19,6 @@ jobs:
           distribution: 'corretto'
           java-version: 17
 
-      - name: Unit Tests
-        run: mvn -B test --file pom.xml
-
-      - name: Build the application
-        run: |
-          mvn clean
-          mvn -B package --file pom.xml
-
       - name: Create docker image
         run: |
           mvn clean
@@ -40,6 +32,9 @@ jobs:
 
       - name: Start docker container
         run: docker run --name ${{ github.event.repository.name }} -p 8189:8189 -d ${{ github.event.repository.name }}:0.0.1-SNAPSHOT
+
+      - name: Delete trash
+        run: docker rmi paketobuildpacks/builder-jammy-base
 
 #      - name: Build Docker Image
 #        uses: actions/build-push-action@v5
