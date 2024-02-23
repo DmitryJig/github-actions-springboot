@@ -58,6 +58,9 @@
 							<BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
 						</env>
 					</image>
+<!--					<image>-->
+<!--						<builder>paketobuildpacks/builder-jammy-base:latest</builder>-->
+<!--					</image>-->
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
