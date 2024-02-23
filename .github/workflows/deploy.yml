@@ -34,9 +34,16 @@ jobs:
         run: |
           pwd
 
+      - name: Delete docker container
+        run: |
+          docker stop github-actions-springboot
+          docker rm github-actions-springboot
+        continue-on-error: true
+
       - name: Create docker image
         run: |
           mvn clean
+          docker rm 
           mvn spring-boot:build-image
 
 

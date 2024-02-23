@@ -2,4 +2,4 @@
 mvn spring-boot:build-image
 
 Создаем и стартуем докер контейнер
-sudo docker run --name githup-actions-spring-app -p 8080:8189 -d github-actions-springboot:0.0.1-SNAPSHOT
+sudo docker run --name githup-actions-spring-app -p 8189:8189 -d github-actions-springboot:0.0.1-SNAPSHOT
