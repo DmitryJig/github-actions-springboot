@@ -13,14 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Print project name
-        run: echo ${{ github.event.repository.name }}
-        continue-on-error: true
-
-      - name: Print project name 2
-        run: echo ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
-        continue-on-error: true
-
       - name: Setup JDK 17
         uses: actions/setup-java@v3
         with:
@@ -42,13 +34,12 @@ jobs:
 
       - name: Delete docker container
         run: |
-          docker stop github-actions-springboot
-          docker rm github-actions-springboot
+          docker stop ${{ github.event.repository.name }}
+          docker rm ${{ github.event.repository.name }}
         continue-on-error: true
 
       - name: Start docker container
-        run: docker run --name github-actions-springboot -p 8189:8189 -d github-actions-springboot:0.0.1-SNAPSHOT
-
+        run: docker run --name ${{ github.event.repository.name }} -p 8189:8189 -d ${{ github.event.repository.name }}:0.0.1-SNAPSHOT
 
 #      - name: Build Docker Image
 #        uses: actions/build-push-action@v5
