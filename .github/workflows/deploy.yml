@@ -25,13 +25,11 @@ jobs:
           mvn spring-boot:build-image
 
       - name: Delete docker container
-        run: |
-          docker stop ${{ github.event.repository.name }}
-          docker rm ${{ github.event.repository.name }}
+        run: docker rm -f ${{ github.event.repository.name }}
         continue-on-error: true
 
       - name: Start docker container
-        run: docker run --name ${{ github.event.repository.name }} -p 8189:8189 -d ${{ github.event.repository.name }}:0.0.1-SNAPSHOT
+        run: docker run --net shopnetwork --ip 172.24.0.12 --name ${{ github.event.repository.name }} -p 8189:8189 -d ${{ github.event.repository.name }}:0.0.1-SNAPSHOT
 
       - name: clean trash
         run: docker rmi paketobuildpacks/builder-jammy-base
