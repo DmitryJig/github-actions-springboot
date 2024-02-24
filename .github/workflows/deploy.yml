@@ -19,7 +19,7 @@ jobs:
           distribution: 'corretto'
           java-version: 17
 
-      - name: Create docker image
+      - name: Create docker image # todo create dockerfile
         run: |
           mvn clean
           mvn spring-boot:build-image
@@ -32,3 +32,6 @@ jobs:
 
       - name: Start docker container
         run: docker run --name ${{ github.event.repository.name }} -p 8189:8189 -d ${{ github.event.repository.name }}:0.0.1-SNAPSHOT
+
+      - name: clean trash
+        run: docker rmi paketobuildpacks/builder-jammy-base

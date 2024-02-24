@@ -1,10 +1,19 @@
 server:
-  port : 8189
+  port: 8189
+  servlet:
+    context-path: /app
+  error:
+    include-message: always
+
 spring:
-  datasource:
-    url: jdbc:h2:mem:mydb
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+  datasource:
+    url: jdbc:postgresql://172.24.0.11:5432/shop_db
+    username: adminuser
+    password: 747482hfsjbc[
+    driverClassName: org.postgresql.Driver

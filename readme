@@ -3,3 +3,15 @@ mvn spring-boot:build-image
 
 Создаем и стартуем докер контейнер
 sudo docker run --name githup-actions-spring-app -p 8189:8189 -d github-actions-springboot:0.0.1-SNAPSHOT
+
+на сервере создаем подсеть
+docker network create --subnet=172.24.0.0/16 shopnetwork
+
+создаем контейнер с бд с фиксированным ip
+docker run --name postgres_shop_db -d --net shopnetwork --ip 172.24.0.11 -p 5432:5432 -e POSTGRES_PASSWORD=747482hfsjbc[ -e POSTGRES_USER=adminuser -e POSTGRES_DB=shop_db -v /custom/mount:/var/lib/postgresql/data postgres:latest
+
+смотрим характеристики пакета бд
+docker inspect postgres_shop_db
+ищем айпи адрес
+"IPAddress": "172.24.0.11"
+этот айпи устанавливаем в настройках соединения с бд
