@@ -33,7 +33,9 @@ jobs:
 #          mvn spring-boot:build-image
 
       - name: Delete docker container
-        run: docker rm -f ${{ github.event.repository.name }}
+        run: |
+          docker rm -f ${{ github.event.repository.name }}
+          docker rmi ${{ github.event.repository.name }}
         continue-on-error: true
 
       - name: Start docker container
