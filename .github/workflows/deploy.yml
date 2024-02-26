@@ -37,7 +37,7 @@ jobs:
         continue-on-error: true
 
       - name: Start docker container
-        run: docker run --net shopnetwork --ip 172.24.0.12 --name ${{ github.event.repository.name }} -p 8189:8189 -d ${{ github.event.repository.name }}:0.0.1-SNAPSHOT
+        run: docker run --net shopnetwork --ip 172.24.0.12 --name ${{ github.event.repository.name }} -p 8189:8189 -d ${{ github.event.repository.name }}:latest
 
 #      - name: clean trash
 #        run: docker rmi paketobuildpacks/builder-jammy-base
