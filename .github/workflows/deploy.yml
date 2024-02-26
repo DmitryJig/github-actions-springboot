@@ -24,6 +24,11 @@ jobs:
           mvn clean
           mvn -B package --file pom.xml
 
+      - name: Delete docker container
+        run: |
+          docker rm -f ${{ github.event.repository.name }}
+        continue-on-error: true
+
       - name: delete prev image
         run: docker rmi ${{ github.event.repository.name }}
         continue-on-error: true
@@ -35,11 +40,6 @@ jobs:
 #        run: |
 #          mvn clean
 #          mvn spring-boot:build-image
-
-      - name: Delete docker container
-        run: |
-          docker rm -f ${{ github.event.repository.name }}
-        continue-on-error: true
 
       - name: Start docker container
         run: docker run --net shopnetwork --ip 172.24.0.12 --name ${{ github.event.repository.name }} -p 8189:8189 -d ${{ github.event.repository.name }}:latest
