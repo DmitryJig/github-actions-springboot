@@ -26,6 +26,7 @@ jobs:
 
       - name: delete prev image
         run: docker rmi ${{ github.event.repository.name }}
+        continue-on-error: true
 
       - name: Create docker image
         run: docker build -t ${{ github.event.repository.name }} .
