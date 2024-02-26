@@ -16,13 +16,21 @@ jobs:
       - name: Setup JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'corretto'
+          distribution: 'oracle'
           java-version: 17
 
-      - name: Create docker image # todo create dockerfile
+      - name: Build the application
         run: |
           mvn clean
-          mvn spring-boot:build-image
+          mvn -B package --file pom.xml
+
+      - name: Create docker image
+        run: docker build -t ${{ github.event.repository.name }} .
+
+#      - name: Create docker image # todo create dockerfile
+#        run: |
+#          mvn clean
+#          mvn spring-boot:build-image
 
       - name: Delete docker container
         run: docker rm -f ${{ github.event.repository.name }}
@@ -31,5 +39,6 @@ jobs:
       - name: Start docker container
         run: docker run --net shopnetwork --ip 172.24.0.12 --name ${{ github.event.repository.name }} -p 8189:8189 -d ${{ github.event.repository.name }}:0.0.1-SNAPSHOT
 
-      - name: clean trash
-        run: docker rmi paketobuildpacks/builder-jammy-base
+#      - name: clean trash
+#        run: docker rmi paketobuildpacks/builder-jammy-base
+#        continue-on-error: true
