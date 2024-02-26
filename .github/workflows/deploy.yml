@@ -24,6 +24,9 @@ jobs:
           mvn clean
           mvn -B package --file pom.xml
 
+      - name: delete prev image
+        run: docker rmi ${{ github.event.repository.name }}
+
       - name: Create docker image
         run: docker build -t ${{ github.event.repository.name }} .
 
@@ -35,7 +38,6 @@ jobs:
       - name: Delete docker container
         run: |
           docker rm -f ${{ github.event.repository.name }}
-          docker rmi ${{ github.event.repository.name }}
         continue-on-error: true
 
       - name: Start docker container

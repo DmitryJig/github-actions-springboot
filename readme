@@ -4,6 +4,8 @@ mvn spring-boot:build-image
 на сервере создаем подсеть
 docker network create --subnet=172.24.0.0/16 shopnetwork
 
+(посмотреть список подсетей можно командой docker network ls)
+
 Создаем и стартуем докер контейнер приложения
 sudo docker run --name githup-actions-spring-app --net shopnetwork --ip 172.24.0.12 -p 8189:8189 -d github-actions-springboot:0.0.1-SNAPSHOT
 
