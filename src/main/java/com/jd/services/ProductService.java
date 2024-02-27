@@ -15,4 +15,10 @@ public class ProductService {
     public List<Product> findAll (){
         return productRepository.findAll();
     }
+
+    public Product findById(Long id) {
+        return productRepository
+                .findById(id)
+                .orElseThrow(()-> new RuntimeException("product not found"));
+    }
 }
