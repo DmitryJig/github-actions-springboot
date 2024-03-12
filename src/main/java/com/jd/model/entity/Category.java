@@ -1,39 +1,32 @@
 package com.jd.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "products")
+@Table(name = "categories")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "price")
-    private BigDecimal price;
-
-    @Column(name = "description")
-    private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @OneToMany(mappedBy = "category")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Product> products;
 
     @CreationTimestamp
     @Column(name = "created_at")

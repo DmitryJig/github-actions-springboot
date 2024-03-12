@@ -36,7 +36,7 @@ jobs:
       - name: Create docker image
         run: docker build -t ${{ github.event.repository.name }} .
 
-#      - name: Create docker image # todo create dockerfile
+#      - name: Create docker image
 #        run: |
 #          mvn clean
 #          mvn spring-boot:build-image

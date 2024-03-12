@@ -1,12 +1,10 @@
 package com.jd.api;
 
+import com.jd.model.dto.ProductRecordDto;
 import com.jd.model.entity.Product;
 import com.jd.services.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,13 +15,17 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<Product> findAll(){
+    public List<ProductRecordDto> findAll(){
         return productService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Product findById(@PathVariable Long id){
+    public ProductRecordDto findById(@PathVariable Long id){
         return productService.findById(id);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteProductById(@PathVariable Long id) {
+        productService.deleteById(id);
+    }
 }
